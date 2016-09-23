@@ -1,0 +1,24 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE "Positions" (
+"TeamARobot1X"  INTEGER,
+"TeamARobot1Y"  INTEGER,
+"TeamARobot2X"  INTEGER,
+"TeamARobot2Y"  INTEGER,
+"TeamARobot3X"  INTEGER,
+"TeamARobot3Y"  INTEGER,
+"TeamBRobot1X"  INTEGER,
+"TeamBRobot1Y"  INTEGER,
+"TeamBRobot2X"  INTEGER,
+"TeamBRobot2Y"  INTEGER,
+"TeamBRobot3X"  INTEGER,
+"TeamBRobot3Y"  INTEGER,
+"BallX"  INTEGER,
+"BallY"  INTEGER,
+"InputTime"  REAL
+);
+CREATE TABLE "Teams" (
+"TeamName"  TEXT(50),
+"TeamColor"  INTEGER
+);
+COMMIT;
