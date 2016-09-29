@@ -14,10 +14,10 @@ DEBUG_FLAG = -g
 INCLUDES = -Isrc
 
 LIBRARIES_PROTO = `pkg-config --cflags --libs protobuf`
-LIBRARIES_BOOST = -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread
+LIBRARIES_BOOST = `-lboost_system -lboost_filesystem -lboost_program_options -lboost_thread1`
 LIBRARIES_SQL = -l sqlite3 
 
-LIBRARIES = $(LIBRARIES_PROTO) $(LIBRARIES_BOOST) $(LIBRARIES_SQL) -lzmq -pthread -lm -w
+LIBRARIES = $(LIBRARIES_PROTO) $(LIBRARIES_BOOST)-lzmq -pthread -lm -w $(LIBRARIES_SQL) 
 
 
 

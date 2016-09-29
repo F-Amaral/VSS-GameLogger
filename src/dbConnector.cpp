@@ -1,15 +1,15 @@
 #include "dbConnector.h"
-
-using namespace std;
+#include "time.h"
 
 dbConnector::dbConnector(){
-	char* command="echo $(date | tr \" \" \"-\" | rev | cut -d \"-\" -f3- | rev).db";
-	dbName = (char*)system(command);
+
+	string command="echo -n $(date | tr \" \" \"-\" | rev | cut -d \"-\" -f3- | rev).db";
+	dbName = cmdTerminal(command);
 	//cout << dbName << endl;
 }
 
 void dbConnector::connect(){
-	rc=sqlite3_open((const char*)dbName, &db);
+	rc=sqlite3_open(dbName.c_str(), &db);
 	if(!checkConnection()){
 		cout << "Database Error! Data will not be stored!" << endl;
 		exit(0);
@@ -33,14 +33,30 @@ void dbConnector::generateDB(){
 	cout << "go to sleep" << endl;
 	commandString << "$(cat src/default/defaultDBModel.dump | sqlite3 databases/" << dbName << ")";
 	string tmp = commandString.str();
-	cout << "------------------" << tmp << endl;
+	cout << "Tmp " << tmp << endl;
 	const char* command = tmp.c_str();
 	int i = system(command);
-	cout << "name" << dbName << endl;
 }
 
 void dbConnector::resolve(){
 	generateDB();
 	connect();
-	closeConnection();
+	//closeConnection();
 }
+
+
+string dbConnector::cmdTerminal(string s){
+        char buffer[1024];
+        std::string result = "";
+
+        FILE* pipe = popen(s.c_str(), "r");
+        if (!pipe) return "ERROR";
+        
+        while(!feof(pipe)) {
+            if(fgets(buffer, 1024, pipe) != NULL)
+
+                result += buffer;
+        }
+        pclose(pipe);
+        return result;
+    }

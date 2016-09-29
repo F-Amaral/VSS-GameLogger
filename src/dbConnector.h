@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string>
 
+using namespace std;
+
 class dbConnector
 {
 public:
@@ -13,9 +15,9 @@ public:
 	void closeConnection();
 	void generateDB();
 	void resolve();
-
+	string cmdTerminal(string s);
 private:
-	char *dbName;
+	string dbName;
 	char *sqlErrorMessage;
 	sqlite3 *db;
 	int rc;
